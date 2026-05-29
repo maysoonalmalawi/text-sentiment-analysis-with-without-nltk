@@ -35,22 +35,18 @@ for word in tokenized_text:
 
 # ── Step 3: Sentiment Analysis ────────────────────────────────
 
-def sentiment_analyze(sentiment_text):
-    # Use NLTK's SentimentIntensityAnalyzer to get positive/negative scores
-    score = SentimentIntensityAnalyzer().polarity_scores(sentiment_text)
-    neg = score['neg']
-    pos = score['pos']
+# Use NLTK's SentimentIntensityAnalyzer to get sentiment scores
+score = SentimentIntensityAnalyzer().polarity_scores(cleaned_text)
+neg = score['neg']
+pos = score['pos']
 
-    # Compare scores to determine the overall sentiment
-    if neg > pos:
-        print("Negative Sentiment")
-    elif pos > neg:
-        print("Positive Sentiment")
-    else:
-        print("Neutral Sentiment")
-
-# Run sentiment analysis on the cleaned text
-sentiment_analyze(cleaned_text)
+# Compare scores to determine and print the overall sentiment
+if neg > pos:
+    print("Negative Sentiment")
+elif pos > neg:
+    print("Positive Sentiment")
+else:
+    print("Neutral Sentiment")
 
 # ── Step 4: Match words to emotions ───────────────────────────
 
@@ -79,12 +75,23 @@ fig, ax = plt.subplots()
 ax.bar(w.keys(), w.values())
 
 # Add chart title and axis labels for clarity
-ax.set_title("Emotion Frequency in Text")
+ax.set_title("Emotion Frequency & Sentiment Analysis")
 ax.set_xlabel("Emotion")
 ax.set_ylabel("Count")
 
 # Rotate x-axis labels so emotion names don't overlap
 fig.autofmt_xdate()
+
+# Display the full sentiment scores as a text box on the chart
+sentiment_text = (f"Positive: {score['pos']:.2f}\n"
+                  f"Negative: {score['neg']:.2f}\n"
+                  f"Neutral:  {score['neu']:.2f}")
+
+ax.text(0.02, 0.95, sentiment_text,
+        transform=ax.transAxes,
+        fontsize=10,
+        verticalalignment='top',
+        bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.5))
 
 # Render and display the final chart
 plt.show()

@@ -1,5 +1,5 @@
 # ============================================================
-# Sentiment Analysis from Text
+# Sentiment Analysis from Text (Without NLTK)
 # Reads a text file, filters meaningful words, matches them
 # to emotions, and visualizes the results as a bar chart.
 # ============================================================
