@@ -1,5 +1,5 @@
 # ============================================================
-# Emotion Analysis from Text
+# Sentiment Analysis from Text
 # Reads a text file, filters meaningful words, matches them
 # to emotions, and visualizes the results as a bar chart.
 # ============================================================
@@ -13,10 +13,10 @@ import matplotlib.pyplot as plt
 # Read the entire text file into a string
 text = open("read.txt", encoding="utf-8").read()
 
-# Convert all characters to lowercase for consistent comparison
+# Convert all characters to lowercase
 lowercase_text = text.lower()
 
-# Remove all punctuation so words like "happy!" and "happy" are treated the same
+# Remove all punctuation
 cleaned_text = lowercase_text.translate(str.maketrans('', '', string.punctuation))
 
 # Split the cleaned text into individual words (tokens)
@@ -46,7 +46,6 @@ for word in tokenized_text:
 
 # emotions.txt is expected to follow the format: word: emotion (one entry per line)
 emotion_list = []  # Stores the emotion label for each matched word
-word_list = []     # Stores the matched words found in the text
 
 with open("emotions.txt", 'r') as file:
     for line in file:
@@ -56,9 +55,8 @@ with open("emotions.txt", 'r') as file:
         # Split each cleaned line into a word and its associated emotion
         word, emotion = clear_line.split(":")
 
-        # If the emotion word appears in our filtered text, record the match
+        # If the emotion word appears in our filtered text, record the associated emotion
         if word in final_words:
-            word_list.append(word)
             emotion_list.append(emotion)
 
 # ── Step 4: Count and visualize emotion frequencies ───────────
