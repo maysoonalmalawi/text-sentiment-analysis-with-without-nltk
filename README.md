@@ -1,4 +1,4 @@
-# Text Sentiment Analysis — With and Without NLTK
+# Text Sentiment Analysis With and Without NLTK
 
 Text emotion detection and sentiment analysis using Python, with and without NLTK, with Matplotlib visualizations.
 
